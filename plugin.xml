@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="com-weclass-qqlocation" version="0.1.0">
+    <name>QQLocation</name>
+    <description>QQ Location Plugin for Phonegap</description>
+    <license>MIT</license>
+    <keywords>qq, location, phonegap</keywords>
+ 
+    <!-- android -->
+    <platform name="android">
+        <js-module src="www/qqlocation.js" name="QQLocation">
+            <clobbers target="window.qqLocation" />
+        </js-module>
+ 
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="QQLocation">
+                <param name="android-package" value="hope.plugins.qqlocation.QQLocation"/>
+            </feature>
+        </config-file> 
+        
+        <config-file target="AndroidManifest.xml" parent="/*">
+			<!-- 通过GPS得到精确位置 -->
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<!-- 通过网络得到粗略位置 -->
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<!-- 访问网络. 某些位置信息需要从网络服务器获取 -->
+			<uses-permission android:name="android.permission.INTERNET" />
+			<!-- 访问WiFi状态. 需要WiFi信息用于网络定位 -->
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<!-- 修改WiFi状态. 发起WiFi扫描, 需要WiFi信息用于网络定位 -->
+			<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+			<!-- 访问网络状态, 检测网络的可用性. 需要网络运营商相关信息用于网络定位 -->
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<!-- 访问网络的变化, 需要某些信息用于网络定位 -->
+			<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+			<!-- 访问手机当前状态, 需要某些信息用于网络定位 -->
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<meta-data android:name="TencentMapSDK" android:value="JZ7BZ-EUUKJ-DF7FV-F4V2H-KE3NH-2LFVB" />
+        </config-file>
+        
+        <source-file src="src/android/QQLocation.java" target-dir="src/hope/plugins/qqlocation" />   
+        <source-file src="src/android/TencentLocationSDK_v4.0_r139747.jar" target-dir="libs" framework="true"/>
+        <source-file src="src/android/armeabi/libtencentloc.so" target-dir="libs/armeabi" framework="true"/>
+		<source-file src="src/android/armeabi/libtencentloc.so" target-dir="libs/armeabi-v7a" framework="true"/>
+    </platform>
+</plugin>

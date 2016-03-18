@@ -1,0 +1,1 @@
+com-weclass-qqlocation
